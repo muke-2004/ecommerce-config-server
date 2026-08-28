@@ -1,38 +1,4 @@
-spring:
-  datasource:
-    url: jdbc:postgresql://localhost:9000/orderDB
-    username: postgres
-    password: 123456789
 
-  jpa:
-    hibernate:
-      ddl-auto: create-drop
-    show-sql: true
-    defer-datasource-initialization: true
-    properties:
-      hibernate:
-        format_sql: true
-
-  sql:
-    init:
-      mode: always
-      data-locations: classpath:data.sql
-
-server:
-  servlet:
-    context-path: /orders
-  port: 9010
-management:
-  health:
-    circuit breakers:
-      enabled: true
-  endpoints:
-    web:
-      exposure:
-        include: "*"
-  endpoint:
-    health:
-      show-details: always
 
 spring:
   application:
@@ -84,6 +50,15 @@ resilience4j:
         waitDurationInOpenState: 20s
         permittedNumberOfCallsInHalfOpenState: 10
         eventConsumerBufferSize: 10
-
-
+management:
+  health:
+    circuit breakers:
+      enabled: true
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: always
 
