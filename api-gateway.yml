@@ -1,4 +1,9 @@
-cloud:
+spring:
+  application:
+    name: api-gateway
+  config:
+    import: configserver:http://localhost:8888
+  cloud:
     gateway:
       routes:
         - id: order-service
@@ -18,6 +23,7 @@ cloud:
           filters:
             - StripPrefix=2
             - AddRequestHeader=X-Custom-Header, Anuj
+
 eureka:
   client:
     service-url:
