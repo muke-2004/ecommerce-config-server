@@ -1,8 +1,4 @@
 spring:
-  application:
-    name: api-gateway
-  config:
-    import: configserver:http://localhost:8888
   cloud:
     gateway:
       routes:
@@ -15,7 +11,7 @@ spring:
             - name: LoggingOrdersFilter
             - name: Authentication
               args:
-                isEnabled: true
+                isEnabled: false
         - id: inventory-service
           uri: lb://INVENTORY-SERVICE
           predicates:
