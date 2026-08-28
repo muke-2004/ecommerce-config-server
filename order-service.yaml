@@ -1,8 +1,4 @@
-
-
 spring:
-  application:
-    name: order-service
   datasource:
     url: jdbc:postgresql://localhost:9000/orderDB
     username: postgres
@@ -18,28 +14,27 @@ spring:
   sql:
     init:
       mode: always
-  config:
-    import:
-      configserver:http://localhost:8888
-
 server:
   servlet:
     context-path: /orders
   port: 9020
-
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:8761/eureka
 resilience4j:
   retry:
     instances:
       inventoryRetry:
         maxRetryAttempts: 3
         waitDuration: 5s
-  rate limiter:
+  rateLimiter:
     configs:
       default:
         limitForPeriod: 1
         limitRefreshPeriod: 5s
-        timeOutDuration: 1s
-  circuit breaker:
+        timeoutDuration: 1s
+  circuitBreaker:
     instances:
       inventoryCircuitBreaker:
         registerHealthIndicator: true
@@ -52,7 +47,7 @@ resilience4j:
         eventConsumerBufferSize: 10
 management:
   health:
-    circuit breakers:
+    circuitbreakers:
       enabled: true
   endpoints:
     web:
@@ -61,4 +56,3 @@ management:
   endpoint:
     health:
       show-details: always
-
